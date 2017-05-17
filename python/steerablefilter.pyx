@@ -5,6 +5,8 @@ import numpy as np
 cimport numpy as np
 np.import_array()
 import ctypes
+from matplotlib.colors import hsv_to_rgb
+
 
 cdef extern from "steerableDetector.h" namespace "steerable":
     cdef cppclass SteerableDetector:
@@ -20,7 +22,9 @@ cdef extern from "steerableDetector.h" namespace "steerable":
         double sigma_
         int borderCondition_
         
-        double *response_, *orientation_, *nms_response_;
+        double *response_
+        double *orientation_
+        double *nms_response_
 
 
 cdef class Detector2D:
@@ -61,3 +65,12 @@ cdef class Detector2D:
         fb = np.zeros([n, self.thisptr.nx_, self.thisptr.ny_])
         self.thisptr.getAngleResponse(&fb[0,0,0], n)
         return fb
+    def make_composite(self, response, orientation):
+        if self.thisptr.M_%2==0:
+            a = (orientation+np.pi/2)/np.pi
+        else:
+            a = (orientation+np.pi)/(2*np.pi)
+        rescale = lambda s: (s-np.min(s))/(np.max(s)-np.min(s))
+        composite = np.dstack((a, np.ones(response.shape), rescale(response)))
+        composite = (255*hsv_to_rgb(composite)).astype(np.uint8)
+        return composite

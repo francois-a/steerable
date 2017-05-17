@@ -286,7 +286,7 @@ void SteerableDetector::runNMS() {
     double ux, uy, v1, v2;
     
     div_t divRes;
-    for (int i=0;i<nx_*ny_;++i) {
+    for (size_t i=0;i<nx_*ny_;++i) {
         divRes = div(i, nx_);
         ux = cos(orientation_[i]);
         uy = sin(orientation_[i]);
@@ -310,7 +310,7 @@ void SteerableDetector::getAngleResponse(double* p, const size_t nt) {
     } else {
         dt = 2.0*PI/nt;
     }
-    for (int t=0;t<nt;++t) {
+    for (size_t t=0;t<nt;++t) {
         for (int i=0;i<N;++i) {
             divRes = div(i, nx_);
             p[t*N + divRes.quot+divRes.rem*ny_] = (this->*pointresp_fct_)(i, t*dt);
@@ -464,7 +464,7 @@ void SteerableDetector::filterM1() {
     double* tRoots = new double[2];
     double gxi, gyi;
     
-    for (int i=0;i<nx_*ny_;++i) {
+    for (size_t i=0;i<nx_*ny_;++i) {
         gxi = approxZero(gx[i]);
         gyi = approxZero(gy[i]);
         
@@ -487,7 +487,7 @@ void SteerableDetector::filterM2() {
     double a = a22-a20;
     double temp;
    
-    for (int i=0;i<nx_*ny_;++i) {
+    for (size_t i=0;i<nx_*ny_;++i) {
                 
         A = a*gxy[i];
         B = a*(gxx[i]-gyy[i]);
@@ -552,7 +552,7 @@ void SteerableDetector::filterM3() {
     double A, B, C, D;
     int nr, nt, deg;
     
-    for (int i=0;i<nx_*ny_;++i) {
+    for (size_t i=0;i<nx_*ny_;++i) {
         A = -a10*gx[i] + (2.0*a32-3.0*a30)*gxyy[i] - a32*gxxx[i]; // sin^3
         B =  a10*gy[i] + (3.0*a30-2.0*a32)*gyyy[i] + (7.0*a32-6.0*a30)*gxxy[i]; // sin^2 cos
         C = -a10*gx[i] + (2.0*a32-3.0*a30)*gxxx[i] + (6.0*a30-7.0*a32)*gxyy[i];
@@ -666,7 +666,7 @@ void SteerableDetector::filterM4() {
     int nr, deg;
     double delta;
     
-    for (int i=0;i<nx_*ny_;i++) {
+    for (size_t i=0;i<nx_*ny_;i++) {
         
         A = (a22-a20)*gxy[i] + (a42-2.0*a40)*gxyyy[i] + (2.0*a44-a42)*gxxxy[i];
         B = (a20-a22)*gyy[i] + (a22-a20)*gxx[i] + (2.0*a40-a42)*gyyyy[i] + 6.0*(a42-a40-a44)*gxxyy[i] + (2.0*a44-a42)*gxxxx[i];
@@ -819,7 +819,7 @@ void SteerableDetector::filterM5() {
     int nr, nt, deg;
     double delta;
     
-    for (int i=0;i<nx_*ny_;++i) {
+    for (size_t i=0;i<nx_*ny_;++i) {
 
         A = -a10*gx[i] + (2.0*a32-3.0*a30)*gxyy[i] - a32*gxxx[i] + (4.0*a54-3.0*a52)*gxxxyy[i] + 2.0*a52*gxyyyy[i] -a54*gxxxxx[i];
         B = a10*gy[i] + (3.0*a30-2.0*a32)*gyyy[i] + (7.0*a32-6.0*a30)*gxxy[i] - 2.0*a52*gyyyyy[i] + (17.0*a52-12.0*a54)*gxxyyy[i] + (13.0*a54-6.0*a52)*gxxxxy[i];
