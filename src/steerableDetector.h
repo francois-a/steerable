@@ -2,7 +2,7 @@
   steerableDetector: steerable filters for edge and ridge detection
 
   References:
-    [1] Jacob et al., IEEE Trans. Image Proc., 26(8) 1007-1019, 2004.
+    [1] Jacob and Unser, IEEE Trans. Pattern Anal. Mach. Intell. 26(8), 2004.
 
   Copyright (c) 2005-2017 Francois Aguet
 
@@ -45,7 +45,7 @@ public:
     void filter();
     void filter(const double sigma);
     void runNMS();
-    void getFilterbank(double* p, const size_t nt);
+    void getAngleResponse(double* p, const size_t nt);
     
     const double *pixels_;
     size_t nx_, ny_;

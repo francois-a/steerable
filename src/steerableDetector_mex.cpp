@@ -2,7 +2,7 @@
   steerableDetector: steerable filters for edge and ridge detection
 
   References:
-    [1] Jacob et al., IEEE Trans. Image Proc., 26(8) 1007-1019, 2004.
+    [1] Jacob and Unser, IEEE Trans. Pattern Anal. Mach. Intell. 26(8), 2004.
 
   Copyright (c) 2005-2017 Francois Aguet
 
@@ -156,7 +156,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
         const mwSize dims[] = {ny, nx, nt};
         plhs[3] = mxCreateNumericArray(3, dims, mxDOUBLE_CLASS, mxREAL);
         double* p = mxGetPr(plhs[3]);
-        sd.getFilterbank(p, nt);
+        sd.getAngleResponse(p, nt);
     }
     
     // Free memory
