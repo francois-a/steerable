@@ -1,6 +1,8 @@
 ## Steerable filters
 <img style="float: right;" src="http://www.francoisaguet.net/img/dnaHSV.jpg">
-Steerable filters for edge and ridge detection from [Jacob and Unser, 2004](http://ieeexplore.ieee.org/document/1307008/), implemented in C++ with wrappers for Python and Matlab.
+
+
+Steerable filters for edge and ridge detection from [Jacob and Unser, 2004](http://ieeexplore.ieee.org/document/1307008) implemented in C++ with wrappers for Python and Matlab.
 
 ### Python
 
