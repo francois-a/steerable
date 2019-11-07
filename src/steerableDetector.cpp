@@ -284,10 +284,10 @@ void SteerableDetector::filter(const double sigma) {
 void SteerableDetector::runNMS() {
     // non-maximum suppression
     double ux, uy, v1, v2;
-    
+
     div_t divRes;
     for (size_t i=0;i<nx_*ny_;++i) {
-        divRes = div(i, nx_);
+        divRes = div((int)i, nx_);
         ux = cos(orientation_[i]);
         uy = sin(orientation_[i]);
         v1 = interp(response_, nx_, ny_, divRes.rem+ux, divRes.quot+uy);

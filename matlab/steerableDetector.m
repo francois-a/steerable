@@ -17,7 +17,7 @@
 %   rotations : response of the input to rotated versions of the filter, at 'nAngles' different angles.
 %
 % References:
-%  [1] Jacob et al., IEEE Trans. Image Proc., 26(8) 1007-1019, 2004.
+%  [1] Jacob and Unser, IEEE Trans. Pattern Anal. Mach. Intell. 26(8), 2004.
 
 % Author: Francois Aguet
 % Adapted from the SteerableJ package, Copyright (C) 2005-2008 Francois Aguet, Biomedical Imaging Group, EPFL.

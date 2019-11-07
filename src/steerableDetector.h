@@ -19,9 +19,9 @@
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
 */
 
@@ -46,46 +46,46 @@ public:
     void filter(const double sigma);
     void runNMS();
     void getAngleResponse(double* p, const size_t nt);
-    
+
     const double *pixels_;
     size_t nx_, ny_;
     int M_;
     double sigma_;  // standard deviation
     double window_;  // kernel size: [-window*sigma ... window*sigma]
     int borderCondition_;
-    
+
     double *response_, *orientation_, *nms_response_;
-    
+
 private:
     typedef void (SteerableDetector::*filterFct)();
     typedef double (SteerableDetector::*pointrespFct)(int, double);
-    
+
     void init(const double *pixels, const size_t nx, const size_t ny, const int order, const double sigma, const int borderCondition);
-    
+
     filterFct filter_fct_;
     pointrespFct pointresp_fct_;
-    
+
     double **templates_;
     int nTemplates_;
     double *alpha_;
-    
+
     static int getNumTemplates(const int M);
     void computeWeights();
     void computeTemplates();
-    
+
     // Point responses
     double pointRespM1(const int i, const double angle);
     double pointRespM2(const int i, const double angle);
     double pointRespM3(const int i, const double angle);
     double pointRespM4(const int i, const double angle);
     double pointRespM5(const int i, const double angle);
-    
+
     void filterM1();
     void filterM2();
     void filterM3();
     void filterM4();
     void filterM5();
-    
+
     static int mirror(const int x, const int nx);
     static double interp(const double* image, const int nx, const int ny, const double x, const double y);
     static double opposite(const double theta);

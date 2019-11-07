@@ -1,5 +1,6 @@
 # distutils: language = c++
 # distutils: sources = ../src/steerableDetector.cpp
+# cython: language_level=3
 
 import numpy as np
 cimport numpy as np
@@ -15,13 +16,13 @@ cdef extern from "steerableDetector.h" namespace "steerable":
         void filter()
         void runNMS()
         void getAngleResponse(double* p, const size_t nt)
-        
+
         const double *pixels_
         size_t nx_, ny_
         int M_
         double sigma_
         int borderCondition_
-        
+
         double *response_
         double *orientation_
         double *nms_response_
