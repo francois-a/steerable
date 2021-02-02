@@ -48,6 +48,7 @@ cdef class Detector2D:
     def __dealloc__(self):
         del self.thisptr
     def filter(self):
+        """Apply steerable filter"""
         self.thisptr.filter()
         cdef np.npy_intp dims[2]
         dims[0] = self.thisptr.nx_
@@ -56,17 +57,20 @@ cdef class Detector2D:
         orientation = np.PyArray_SimpleNewFromData(2, &dims[0], np.NPY_FLOAT64, self.thisptr.orientation_)
         return response, orientation
     def get_nms(self):
+        """Run and return non-maximum suppression"""
         self.thisptr.runNMS()
         cdef np.npy_intp dims[2]
         dims[0] = self.thisptr.nx_
         dims[1] = self.thisptr.ny_
         return np.PyArray_SimpleNewFromData(2, &dims[0], np.NPY_FLOAT64, self.thisptr.nms_response_)
     def get_angle_response(self, int n=36):
+        """Compute filter response for a range of angles (default: 36)"""
         cdef np.ndarray[np.double_t, ndim=3, mode="c"] fb
         fb = np.zeros([n, self.thisptr.nx_, self.thisptr.ny_])
         self.thisptr.getAngleResponse(&fb[0,0,0], n)
         return fb
     def make_composite(self, response, orientation):
+        """RGB composite image of filter response and orientation"""
         if self.thisptr.M_%2==0:
             a = (orientation+np.pi/2)/np.pi
         else:
